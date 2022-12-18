@@ -1,0 +1,99 @@
+rule-providers:
+  Direct:
+    type: file
+    behavior: classical
+    path: "./direct.yaml"
+  Reject:
+    type: file
+    behavior: classical
+    path: "./reject.yaml"
+  Basicads:
+    type: file
+    behavior: domain
+    path: "./basicads.yaml"
+  Personalads:
+    type: file
+    behavior: classical
+    path: "./personalads.yaml"
+  18+:
+    type: file
+    behavior: domain
+    path: "./18+.yaml"
+  Nsfw:
+    type: file
+    behavior: domain
+    path: "./nsfw.yaml"
+  Onlineshop:
+    type: file
+    behavior: domain
+    path: "./onlineshopmaster.yaml"
+  clashBlock_Adaway:
+    type: http
+    behavior: classical
+    path: "./rule_provider/clashBlock_adaway.yaml"
+    url: https://raw.githubusercontent.com/zzzt27/clashBlock/main/adaway.yaml
+    interval: 86400
+  Indopride:
+    type: http
+    behavior: classical
+    path: "./rule_provider/rule_indo.yaml"
+    url: https://raw.githubusercontent.com/malikshi/open_clash/main/rule_provider/rule_indo.yaml
+    interval: 86400
+proxy-providers:
+  Akun:
+    type: file
+    path: "./vpn.yaml"
+    health-check:
+      enable: true
+      url: http://www.gstatic.com/generate_204
+      interval: 300
+proxy-groups:
+- name: VPN
+  type: select
+  strategy: round-robin
+  disable-udp: false
+  use:
+  - Akun
+  url: http://www.gstatic.com/generate_204
+  interval: '300'
+  proxies:
+  - LOAD BALANCE
+- name: LOAD BALANCE
+  type: load-balance
+  disable-udp: false
+  use:
+  - Akun
+  url: http://www.gstatic.com/generate_204
+  interval: '300'
+- name: AdBlock
+  type: select
+  disable-udp: false
+  proxies:
+  - VPN
+  - REJECT
+- name: 18+
+  type: select
+  disable-udp: false
+  proxies:
+  - VPN
+  - REJECT
+- name: ID
+  type: select
+  disable-udp: false
+  proxies:
+  - VPN
+  - REJECT
+rules:
+- IP-CIDR,198.18.0.1/16,REJECT,no-resolve
+- DOMAIN-SUFFIX,googlesyndication.com,VPN
+- DOMAIN-SUFFIX,clashofclans.com,VPN,tcp
+- RULE-SET,Personalads,AdBlock
+- RULE-SET,Basicads,AdBlock
+- RULE-SET,clashBlock_Adaway,AdBlock
+- RULE-SET,18+,18+
+- RULE-SET,Nsfw,18+
+- RULE-SET,Onlineshop,VPN
+- RULE-SET,Indopride,VPN
+- RULE-SET,Direct,DIRECT
+- RULE-SET,Reject,REJECT
+- MATCH,VPN
