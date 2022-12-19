@@ -1,0 +1,33 @@
+proxies:
+- name: vmess1
+  type: vmess
+  server: server.com
+  port: 80
+  uuid: 180259e0-73f4-11ed-880d-xxxxxx
+  alterId: 0
+  cipher: auto
+  udp: true
+  skip-cert-verify: true
+  tls: false
+  servername: bug.com
+  network: ws
+  ws-opts:
+    path: /worryfree
+    headers: 
+      host: bug.com
+- name: vmess2
+  type: vmess
+  server: server.com
+  port: 80
+  uuid: ba6bc070-748b-11ed-932a-xxxxxx
+  alterId: 0
+  cipher: auto
+  udp: true
+  skip-cert-verify: true
+  tls: false
+  servername: bug.com
+  network: ws
+  ws-opts:
+    path: /worryfree
+    headers: 
+      host: bug.com

@@ -1,0 +1,166 @@
+---
+proxies:
+#========= Trojan =========
+- name: Trojan
+  type: trojan
+  server: host/ip
+  port: 443
+  password: password
+  udp: true
+  sni: bug.com
+  skip-cert-verify: true
+#========= Trojan WS =========
+- name: Trojan
+  type: trojan
+  server: host/ip
+  port: 443
+  password: password
+  udp: true
+  sni: bug.com
+  skip-cert-verify: true
+  network: ws
+  ws-opts:
+    path: "/path"
+  # headers: bug.com
+#========= Trojan gRPC =========    
+- name: Trojan-gRPC
+  type: trojan
+  server: host/ip
+  port: 443
+  password: password
+  udp: true
+  sni: bug.com
+  skip-cert-verify: true
+  network: grpc
+  grpc-opts:
+    grpc-service-name: trojan-grpc
+#========= Shadowsocks WS =========    
+- name: Shadowsocks-WS
+  type: ss
+  server: host.com
+  port: 443
+  cipher: aes-256-gcm
+  password: password
+  udp: true
+  plugin: v2ray-plugin
+  plugin-opts:
+    mode: websocket
+    host: bug.com
+    tls: true
+    skip-cert-verify: true
+    path: "/path"
+    mux: false
+    headers:
+      custom: bug.com
+#========= Shadowsocks TLS =========     
+- name: Shadowsocks-TLS
+  type: ss
+  server: host/ip
+  port: 443
+  cipher: aes-256-gcm
+  password: password
+  udp: true
+  plugin: obfs
+  plugin-opts:
+    mode: tls
+    host: bug.com
+#========= Shadowsocks R =========
+- name: ShadowsocksR
+  type: ssr
+  server: host/ip
+  port: 8449
+  cipher: aes-256-cfb
+  password: password
+  obfs: tls1.2_ticket_auth
+  protocol: auth_sha1_v4
+  obfs-param: obfs=tls;obfs-host=bug.com
+  udp: true
+#========= Vmess WS =========
+- name: Vmess-WS
+  type: vmess
+  server: host.com
+  port: 443
+  uuid: 2a3647c2-10c5-4e54-8706-299c49ea35d6
+  alterId: 32
+  cipher: auto
+  udp: true
+  skip-cert-verify: true
+  tls: true
+  servername: bug.com
+  network: ws
+  ws-opts:
+    path: "/path"
+  # headers: bug.com
+#========= Vmess gRPC =========    
+- name: Vmess-gRPC
+  type: vmess
+  server: host/ip
+  port: 443
+  uuid: 844c7c50-c05a-11ec-837e-1577c1651679
+  alterId: 32
+  cipher: auto
+  udp: true
+  skip-cert-verify: true
+  tls: true
+  servername: bug.com
+  network: grpc
+  grpc-opts:
+    grpc-service-name: vmess-grpc
+#========= Vlwss gRPC =========
+- name: Vless
+  type: vless
+  server: host/ip
+  port: 8443
+  uuid: fb7de780-765d-4134-bf9d-52b46334867c
+  udp: true
+  skip-cert-verify: true
+  tls: true
+  servername: bug.com
+  network: grpc
+  grpc-opts:
+    grpc-service-name: grpc
+#========= Vlwss xTLS =========    
+- name: VLxTLS
+  type: vless
+  server: host/ip
+  port: 443
+  uuid: 844c7c50-c05a-11ec-837e-1577c1651679
+  udp: true
+  skip-cert-verify: true
+  tls: false
+  servername: bug.com
+  flow: xtls-rprx-direct
+#========= Vlwss WS ========= 
+- name: Vless-WS
+  type: vless
+  server: host.com
+  port: 443
+  uuid: 2a3647c2-10c5-4e54-8706-299c49ea35d6
+  udp: true
+  skip-cert-verify: true
+  tls: true
+  servername: bug.com
+  network: ws
+  ws-opts:
+    path: "/path"
+  # headers: bug.com
+#========= Snell TLS =========
+- name: Snell-TLS
+  type: snell
+  server: host.com
+  port: 443
+  psk: 12345
+  version: '2'
+  obfs-opts:
+    mode: tls
+    host: bug.com
+#========= HTTP(S) =========    
+- name: HTTP(S)
+  type: http
+  server: host.com
+  port: 443
+  username: username
+  password: password
+  skip-cert-verify: true
+  tls: true
+  sni: bug.com
