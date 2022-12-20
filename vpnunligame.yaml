@@ -1,0 +1,41 @@
+proxies:
+- name: UNLIGAME | DO3
+  type: vmess
+  server: 104.16.108.96
+  port: 80
+  uuid: 91061e3e-aa35-4738-bae0-8fe712d665a1
+  alterId: 0
+  cipher: auto
+  udp: true
+  skip-cert-verify: true
+  tls: false
+  servername: do3.kitu.xyz
+  network: ws
+  ws-opts:
+    path: /vmess/
+    headers: 
+      host: do3.kitu.xyz
+- name: UNLIGAME | DO1
+  type: trojan
+  server: 104.16.108.96
+  port: 80
+  password: whyvpn-icetode
+  udp: false
+  sni: trojan-go
+  skip-cert-verify: true
+  network: ws
+  ws-opts:
+    path: "?sni=trojan-go"
+  # headers: do1.kitu.xyz
+- name: UNLIGAME | ID
+  type: trojan
+  server: 104.16.108.96
+  port: 80
+  password: jagoanssh-Cookiesedd
+  udp: false
+  sni: sgcgo.ipservers.xyz
+  skip-cert-verify: true
+  network: ws
+  ws-opts:
+    path: "/trojan"
+  # headers: sgcgo.ipservers.xyz
